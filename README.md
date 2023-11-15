@@ -11,10 +11,12 @@ It is recommended to use the static class Figure to obtain figures.
 
 Example use case:
 
-`var figure = Figure.GetFigure<Circle>();
+```c#
+var figure = Figure.GetFigure<Circle>();
 
 if (figure == null)
     return;
 
 figure.SetRadius(23);
-Console.WriteLine(figure.CalculateArea());`
+Console.WriteLine(figure.CalculateArea());
+```
