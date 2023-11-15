@@ -20,3 +20,4 @@ if (figure == null)
 figure.SetRadius(23);
 Console.WriteLine(figure.CalculateArea());
 ```
+The function for entering sides is different for each figure. 
