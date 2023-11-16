@@ -28,7 +28,7 @@ public class Triangle : IBaseFigureOperations
     /// <returns>Area of the triangle rounded to 6 decimal places</returns>
     public double CalculateArea()
     {
-        if (_x + _y < _z || _x + _z < _y || _z + _y < _x)
+        if ((_x + _y).CompareTo(_z) < 0 || (_x + _z).CompareTo(_y) < 0 || (_z + _y).CompareTo(_x) < 0)
             throw new ArgumentException("Such a triangle cannot exist");
 
         if (_x.CompareTo(_y) == 0 || _x.CompareTo(_z) == 0 || _y.CompareTo(_z) == 0)
