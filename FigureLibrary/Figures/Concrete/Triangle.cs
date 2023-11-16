@@ -31,10 +31,17 @@ public class Triangle : IBaseFigureOperations
         if ((_x + _y).CompareTo(_z) < 0 || (_x + _z).CompareTo(_y) < 0 || (_z + _y).CompareTo(_x) < 0)
             throw new ArgumentException("Such a triangle cannot exist");
 
-        if (_x.CompareTo(_y) == 0 || _x.CompareTo(_z) == 0 || _y.CompareTo(_z) == 0)
+        if (_x.CompareTo(_y) == 0 && (_x.CompareTo(_z) < 0 || _x.CompareTo(_z) > 0)
+            || _x.CompareTo(_z) == 0 && (_x.CompareTo(_y) < 0 || _x.CompareTo(_y) > 0)
+            || _y.CompareTo(_z) == 0 && (_y.CompareTo(_x) < 0 || _x.CompareTo(_x) > 0))
+        {
             return CalculateIsoscelesArea();
+        }
+
         if (_x.CompareTo(_y) == 0 && _x.CompareTo(_z) == 0 && _y.CompareTo(_z) == 0)
+        {
             return CalculateEquilateralArea();
+        }
         return CalculateOrdinaryArea();
     }
 
