@@ -3,7 +3,7 @@
 /// <summary>
 /// Interface for describing figures with a side
 /// </summary>
-public interface IFigureWithSide
+public interface IFigureWithSide : IBaseFigureOperations
 {
     /// <summary>
     /// Set sides to figure

@@ -3,7 +3,7 @@
 /// <summary>
 /// Circle
 /// </summary>
-public class Circle : IFigureWithoutSide, IBaseFigureOperations
+public class Circle : IFigureWithoutSide
 {
     /// <summary>
     /// Radius

@@ -3,7 +3,7 @@
 /// <summary>
 /// Square
 /// </summary>
-public class Square : IFigureWithSide, IBaseFigureOperations
+public class Square : IFigureWithSide
 {
     /// <summary>
     /// One side of the square

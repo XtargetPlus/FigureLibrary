@@ -3,7 +3,7 @@
 /// <summary>
 /// Interface for describing figures without a side
 /// </summary>
-public interface IFigureWithoutSide
+public interface IFigureWithoutSide : IBaseFigureOperations
 {
     /// <summary>
     /// Set radius to figure

@@ -3,7 +3,7 @@
 /// <summary>
 /// Interface that specifies the basic functionality of the figures 
 /// </summary>
-internal interface IBaseFigureOperations
+public interface IBaseFigureOperations
 {
     /// <summary>
     /// Calculate the area of the figure

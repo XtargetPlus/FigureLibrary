@@ -1,4 +1,5 @@
-﻿using FigureLibrary.Figures.Concrete;
+﻿using FigureLibrary.Figures;
+using FigureLibrary.Figures.Concrete;
 
 namespace FigureLibrary;
 
@@ -8,9 +9,9 @@ namespace FigureLibrary;
 public class FigureWithSide
 {
     /// <summary>
-    /// Figure type with sides
+    /// figures without sides
     /// </summary>
-    private readonly FigureWithSideType _figureType;
+    private readonly IFigureWithSide _figure;
 
     /// <summary>
     /// Creating a class to interact with figures with sides
@@ -18,30 +19,23 @@ public class FigureWithSide
     /// <param name="figureType">Figure type with sides</param>
     public FigureWithSide(FigureWithSideType figureType)
     {
-        _figureType = figureType;
+        _figure = figureType switch
+        {
+            FigureWithSideType.Square => new Square(),
+            FigureWithSideType.Triangle => new Triangle(),
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
     /// <summary>
-    /// 
+    /// Calculating the area of a figure
     /// </summary>
-    /// <param name="sides"></param>
+    /// <param name="sides">Figure sides</param>
     /// <returns></returns>
     /// <exception cref="ArgumentOutOfRangeException">If an invalid figure type is passed, an error is raised</exception>
     public double CalculateArea(double[] sides)
     {
-        switch (_figureType)
-        {
-            case FigureWithSideType.Square:
-                var figure = new Square();
-                figure.SetSides(sides);
-                return figure.CalculateArea();
-            case FigureWithSideType.Triangle:
-                var triangle = new Triangle();
-                triangle.SetSides(sides);
-                return triangle.CalculateArea();
-
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        _figure.SetSides(sides);
+        return _figure.CalculateArea();
     }
 }

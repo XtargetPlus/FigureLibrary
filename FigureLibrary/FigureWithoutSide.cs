@@ -1,4 +1,5 @@
-﻿using FigureLibrary.Figures.Concrete;
+﻿using FigureLibrary.Figures;
+using FigureLibrary.Figures.Concrete;
 
 namespace FigureLibrary;
 
@@ -8,9 +9,9 @@ namespace FigureLibrary;
 public class FigureWithoutSide
 {
     /// <summary>
-    /// Figure type without sides
+    /// figures without sides
     /// </summary>
-    private readonly FigureWithoutSideType _figureType;
+    private readonly IFigureWithoutSide _figure;
 
     /// <summary>
     /// Creating a class to interact with figures without sides
@@ -18,7 +19,11 @@ public class FigureWithoutSide
     /// <param name="figureType">Figure type with a side</param>
     public FigureWithoutSide(FigureWithoutSideType figureType)
     {
-        _figureType = figureType;
+        _figure = figureType switch
+        {
+            FigureWithoutSideType.Circle => new Circle(),
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
     /// <summary>
@@ -29,15 +34,7 @@ public class FigureWithoutSide
     /// <exception cref="ArgumentOutOfRangeException">If an invalid figure type is passed, an error is raised</exception>
     public double CalculateArea(double radius)
     {
-        switch (_figureType)
-        {
-            case FigureWithoutSideType.Circle:
-                var figure = new Circle();
-                figure.SetRadius(radius);
-                return figure.CalculateArea();
-
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        _figure.SetRadius(radius);
+        return _figure.CalculateArea();
     }
 }
