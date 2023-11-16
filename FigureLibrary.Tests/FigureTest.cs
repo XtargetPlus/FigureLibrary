@@ -24,9 +24,10 @@ public class FigureTest
     {
         // Arrange
         var figure = Figure.GetFigure<Square>();
+        double[] arr = { 23 };
 
         // Act
-        figure!.SetSideLength(23);
+        figure!.SetSides(arr);
         var result = figure.CalculateArea();
 
         // Fact
@@ -38,9 +39,10 @@ public class FigureTest
     {
         // Arrange
         var figure = Figure.GetFigure<Triangle>();
+        double[] arr = { 23, 14, 11 };
 
         // Act
-        figure!.SetSides(23, 14, 11);
+        figure!.SetSides(arr);
         var result = figure.CalculateArea();
 
         // Fact
@@ -52,9 +54,10 @@ public class FigureTest
     {
         // Arrange
         var figure = Figure.GetFigure<Triangle>();
+        double[] arr = { 23, 14, 23 };
 
         // Act
-        figure!.SetSides(23, 14, 23);
+        figure!.SetSides(arr);
         var result = figure.CalculateArea();
 
         // Fact
@@ -66,9 +69,10 @@ public class FigureTest
     {
         // Arrange
         var figure = Figure.GetFigure<Triangle>();
+        double[] arr = { 23, 23, 23 };
 
         // Act
-        figure!.SetSides(23, 23, 23);
+        figure!.SetSides(arr);
         var result = figure.CalculateArea();
 
         // Fact

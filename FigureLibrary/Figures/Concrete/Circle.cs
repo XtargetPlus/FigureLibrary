@@ -3,17 +3,17 @@
 /// <summary>
 /// Circle
 /// </summary>
-public class Circle : IBaseFigureOperations
+public class Circle : IFigureWithoutSide, IBaseFigureOperations
 {
     /// <summary>
-    /// 
+    /// Radius
     /// </summary>
     private double _radius;
 
     /// <summary>
-    /// Specify the side of the сircle
+    /// Set radius to circle
     /// </summary>
-    /// <param name="radius"></param>
+    /// <param name="radius">Circle radius</param>
     public void SetRadius(double radius) => _radius = radius;
 
     /// <summary>

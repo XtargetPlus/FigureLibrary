@@ -3,7 +3,7 @@
 /// <summary>
 /// Triangle
 /// </summary>
-public class Triangle : IBaseFigureOperations
+public class Triangle : IFigureWithSide, IBaseFigureOperations
 {
     private double _x;
     private double _y;
@@ -12,14 +12,15 @@ public class Triangle : IBaseFigureOperations
     /// <summary>
     /// Specify the sides of the triangle
     /// </summary>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <param name="z"></param>
-    public void SetSides(double x, double y, double z)
+    /// <param name="sides">Triangle sides</param>>
+    public void SetSides(double[] sides)
     {
-        _x = x;
-        _y = y;
-        _z = z;
+        if (sides.Length is > 3 or < 3)
+            throw new ArgumentException("For a triangle, only 3 side needs to be specified");
+
+        _x = sides[0];
+        _y = sides[1];
+        _z = sides[2];
     }
 
     /// <summary>
