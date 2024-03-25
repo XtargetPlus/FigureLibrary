@@ -18,9 +18,9 @@ public class Triangle : IFigureWithSide
         if (sides.Length is > 3 or < 3)
             throw new ArgumentException("For a triangle, only 3 side needs to be specified");
 
-        _x = sides[0];
-        _y = sides[1];
-        _z = sides[2];
+        _x = Math.Round(sides[0], 6);
+        _y = Math.Round(sides[1], 6);
+        _z = Math.Round(sides[2], 6);
     }
 
     /// <summary>
@@ -32,9 +32,9 @@ public class Triangle : IFigureWithSide
         if ((_x + _y).CompareTo(_z) < 0 || (_x + _z).CompareTo(_y) < 0 || (_z + _y).CompareTo(_x) < 0)
             throw new ArgumentException("Such a triangle cannot exist");
 
-        if (_x.CompareTo(_y) == 0 && (_x.CompareTo(_z) < 0 || _x.CompareTo(_z) > 0)
-            || _x.CompareTo(_z) == 0 && (_x.CompareTo(_y) < 0 || _x.CompareTo(_y) > 0)
-            || _y.CompareTo(_z) == 0 && (_y.CompareTo(_x) < 0 || _x.CompareTo(_x) > 0))
+        if (_x.CompareTo(_y) == 0 && _x.CompareTo(_z) != 0
+            || _x.CompareTo(_z) == 0 && _x.CompareTo(_y) != 0
+            || _y.CompareTo(_z) == 0 && _y.CompareTo(_x) != 0)
         {
             return CalculateIsoscelesArea();
         }
@@ -85,7 +85,7 @@ public class Triangle : IFigureWithSide
     /// <returns>Area of the ordinary triangle rounded to 6 decimal places</returns>
     private double CalculateOrdinaryArea()
     {
-        var p = Math.Round((_x + _y + _z) / 2, 6);
+        var p = (_x + _y + _z) / 2;
 
         return Math.Round(Math.Sqrt(p * (p - _x) * (p - _y) * (p - _z)), 6);
     }

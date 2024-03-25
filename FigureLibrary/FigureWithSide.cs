@@ -32,7 +32,6 @@ public class FigureWithSide
     /// </summary>
     /// <param name="sides">Figure sides</param>
     /// <returns></returns>
-    /// <exception cref="ArgumentOutOfRangeException">If an invalid figure type is passed, an error is raised</exception>
     public double CalculateArea(double[] sides)
     {
         _figure.SetSides(sides);

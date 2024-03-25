@@ -31,7 +31,6 @@ public class FigureWithoutSide
     /// </summary>
     /// <param name="radius">Figure radius</param>
     /// <returns>Figure area</returns>
-    /// <exception cref="ArgumentOutOfRangeException">If an invalid figure type is passed, an error is raised</exception>
     public double CalculateArea(double radius)
     {
         _figure.SetRadius(radius);
