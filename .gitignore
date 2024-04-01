@@ -2,9 +2,9 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
-/FigureLibrary/bin/Debug/net7.0
-/FigureLibrary/obj
-/FigureLibrary.sln
-/FigureLibrary.Tests/bin/Debug/net7.0
-/FigureLibrary.Tests/obj
+bin
+obj
+.editorconfig
+.vs
+*.user
+bundles
