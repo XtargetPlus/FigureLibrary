@@ -49,7 +49,15 @@ public interface IFigureSelector<in TRequest, out TResponse> : IFigureSelector
 ```c#
 internal class Circle : IFigureSelector<DoubleCircleAriaVariables, double>, IFigureSelector<IntCircleAriaVariables, int>
 {
-...
+     public double CalculateArea(DoubleCircleAriaVariables variables)
+     {
+
+     }
+
+     public int CalculateArea(IntCircleAriaVariables variables)
+     {
+
+     }
 }
 ```
 
