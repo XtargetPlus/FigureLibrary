@@ -33,4 +33,24 @@ internal class GetForumsUseCase(IGetForumsStorage storage, IFigureManager figure
 
 Если класс TReuqest начинается с Double, значит TResponse ожидается double. Аналогично с типом int. 
 
+Для того, чтобы добавить новую фигуру, требуется унаследоваться от следующего интерфейса:
+
+```c#
+public interface IFigureSelector<in TRequest, out TResponse> : IFigureSelector
+    where TRequest : class
+    where TResponse : unmanaged
+{
+    public TResponse CalculateArea(TRequest variables);
+}
+```
+
+Пример:
+
+```c#
+internal class Circle : IFigureSelector<DoubleCircleAriaVariables, double>, IFigureSelector<IntCircleAriaVariables, int>
+{
+...
+}
+```
+
 Float и decimal не поддерживаются
