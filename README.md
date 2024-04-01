@@ -18,7 +18,8 @@ builder.Services.AddFigureLibrary();
 Пример использования:
 
 ```c#
-internal class GetForumsUseCase(IGetForumsStorage storage, IFigureManager figureManager) : IRequestHandler<GetForumsQuery, IEnumerable<ForumDto>>
+internal class GetForumsUseCase(IGetForumsStorage storage, IFigureManager figureManager)
+    : IRequestHandler<GetForumsQuery, IEnumerable<ForumDto>>
 {
     public Task<IEnumerable<ForumDto>> Handle(GetForumsQuery query, CancellationToken cancellationToken)
     {
