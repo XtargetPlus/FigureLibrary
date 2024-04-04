@@ -1,62 +1,64 @@
 # FigureLibrary
 
-A library for interacting with figures.
+Библиотека для взаимодействия с фигурами.
 
-The following figures are currently represented:
+Реализованы следующие фигуры:
 1) Circle
 2) Square
 3) Rectangle
 
-You can use the static class Figure to obtain figures.
-
-Example use case:
+Прежде чем воспользоваться функционалом фигур, требуется подключить библиотеку к проекту. Далее следует добавить библиотеку в DI:
 
 ```c#
-var figure = Figure.GetFigure<Circle>();
-
-if (figure == null)
-    return;
-
-figure.SetRadius(23);
-Console.WriteLine(figure.CalculateArea());
-```
-The function for entering sides is different for each figure. 
-
-To add a new figure, you need to create a class at the path FigureLibrary/Figures/Concrete and implement the IBaseFigureOperations interface. Next, add a new "if" to Figure.GetFigure<TOut>:
-
-```c#
-if (typeof(TOut) == typeof(YOURFIGURECLASS))
-    return new TOut();
+builder.Services.AddFigureLibrary();
 ```
 
-Another way to interact with figures, through a small proxy in the form of the FigureWithSide and FigureWithoutSide classes.
+После чего можно добавлять интерфейс `IFigureManager` в классы для дальнейшего использования.
+
+Пример использования:
 
 ```c#
-var figure = new FigureWithSide(FigureWithSideType.Square);
-
-double[] sides = { 23 }; 
-var area = figure.CalculateArea(sides);
-```
-```c#
-var figure = new FigureWithoutSide(FigureWithoutSideType.Circle);
-
-double radius = 23;
-var area = figure.CalculateArea(radius);
-```
-
-In this case, to add a new figure, you need to inherit from the interface IFigureWithoutSide or IBaseFigureOperations depending on what kind of figure. 
-
-Then add the type to the appropriate enum, and add the string to the constructors of the FigureWithSide or FigureWithoutSide class.
-
-```c#
-public FigureWithSide(FigureWithSideType figureType)
+internal class GetForumsUseCase(IGetForumsStorage storage, IFigureManager figureManager)
+    : IRequestHandler<GetForumsQuery, IEnumerable<ForumDto>>
 {
-    _figure = figureType switch
+    public Task<IEnumerable<ForumDto>> Handle(GetForumsQuery query, CancellationToken cancellationToken)
     {
-        FigureWithSideType.Square => new Square(),
-        FigureWithSideType.Triangle => new Triangle(),
-        FigureWithSideType.YOURFIGURE => new YOURFIGURE(),
-        _ => throw new ArgumentOutOfRangeException()
-    };
+        figureManager.CalculateArea(new DoubleTriangleAriaVariables(23d, 14d, 11d), out double area);
+        Console.WriteLine($"Для чего-то посчитали площадь треугольника: {area}");
+
+        return storage.GetForums(cancellationToken);
+    }
 }
 ```
+
+Если класс TReuqest начинается с Double, значит TResponse ожидается double. Аналогично с типом int. 
+
+Для того, чтобы добавить новую фигуру, требуется унаследоваться от следующего интерфейса:
+
+```c#
+public interface IFigureSelector<in TRequest, out TResponse> : IFigureSelector
+    where TRequest : class
+    where TResponse : unmanaged
+{
+    public TResponse CalculateArea(TRequest variables);
+}
+```
+
+Пример:
+
+```c#
+internal class Circle : IFigureSelector<DoubleCircleAriaVariables, double>, IFigureSelector<IntCircleAriaVariables, int>
+{
+     public double CalculateArea(DoubleCircleAriaVariables variables)
+     {
+
+     }
+
+     public int CalculateArea(IntCircleAriaVariables variables)
+     {
+
+     }
+}
+```
+
+Float и decimal не поддерживаются
