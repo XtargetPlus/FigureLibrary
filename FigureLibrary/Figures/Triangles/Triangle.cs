@@ -25,9 +25,9 @@ internal partial class Triangle : IFigureSelector<DoubleTriangleAriaVariables, d
             (z + y).CompareTo(x) < 0)
             throw new ArgumentException("Such a triangle cannot exist");
 
-        if (x.CompareTo(y) == 0 && x.CompareTo(z) != 0 ||
-            x.CompareTo(z) == 0 && x.CompareTo(y) != 0 ||
-            y.CompareTo(z) == 0 && y.CompareTo(x) != 0)
+        if ((x.CompareTo(y) == 0 && x.CompareTo(z) != 0) ||
+            (x.CompareTo(z) == 0 && x.CompareTo(y) != 0) ||
+            (y.CompareTo(z) == 0 && y.CompareTo(x) != 0))
         {
             return CalculateIsoscelesArea(x, y, z);
         }
@@ -105,14 +105,14 @@ internal partial class Triangle : IFigureSelector<IntTriangleAriaVariables, int>
             z + y < x)
             throw new ArgumentException("Such a triangle cannot exist");
 
-        if (x == y && x != z ||
-            x == z && x != y ||
-            y == z && y != x)
+        if ((x == y && x != z) ||
+            (x == z && x != y) ||
+            (y == z && y != x))
         {
             return CalculateIsoscelesArea(x, y, z);
         }
 
-        if (x.CompareTo(y) == 0 && x.CompareTo(z) == 0 && x.CompareTo(z) == 0)
+        if (x == y && x == z && x == z)
         {
             return CalculateEquilateralArea(x);
         }
@@ -127,12 +127,12 @@ internal partial class Triangle : IFigureSelector<IntTriangleAriaVariables, int>
     {
         int equalSide;
         int bottomSide;
-        if (x.CompareTo(y) == 0)
+        if (x == y)
         {
             equalSide = x;
             bottomSide = z;
         }
-        else if (x.CompareTo(z) == 0)
+        else if (x == z)
         {
             equalSide = x;
             bottomSide = y;
@@ -160,6 +160,6 @@ internal partial class Triangle : IFigureSelector<IntTriangleAriaVariables, int>
     {
         var p = (x + y + z) / 2;
 
-        return (int)(Math.Sqrt(p * (p - x) * (p - y) * (p - z)));
+        return (int)Math.Sqrt(p * (p - x) * (p - y) * (p - z));
     }
 }
